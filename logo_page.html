@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinMy - Smart Financial Solutions</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 25%, #e0f2e0 50%, #c8e6c9 75%, #a5d6a7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(102,187,106,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(165,214,167,0.1) 0%, transparent 50%);
+            animation: float 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(102,187,106,0.03) 50%, transparent 70%);
+            animation: shimmer 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .logo-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 4rem 3rem;
+            border-radius: 30px;
+            box-shadow: 
+                0 25px 50px rgba(46, 125, 50, 0.15),
+                0 15px 30px rgba(46, 125, 50, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #66bb6a 0%, #4caf50 50%, #388e3c 100%);
+            box-shadow: 
+                0 20px 40px rgba(102, 187, 106, 0.4),
+                0 10px 20px rgba(102, 187, 106, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: logoFloat 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 4s ease-in-out infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 30px 60px rgba(102, 187, 106, 0.5),
+                0 15px 30px rgba(102, 187, 106, 0.4);
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(200%) translateY(200%) rotate(45deg); }
+        }
+
+        .logo-text {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 
+                0 4px 10px rgba(0, 0, 0, 0.3),
+                0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(102, 187, 106, 0.2);
+            border-radius: 50%;
+            animation-duration: 8s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .orbit-ring:nth-child(1) {
+            width: 220px;
+            height: 220px;
+            animation-name: rotateClockwise;
+            border-top-color: rgba(102, 187, 106, 0.6);
+        }
+
+        .orbit-ring:nth-child(2) {
+            width: 260px;
+            height: 260px;
+            animation-name: rotateCounterClockwise;
+            animation-duration: 12s;
+            border-right-color: rgba(165, 214, 167, 0.4);
+        }
+
+        @keyframes rotateClockwise {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2e7d32, #66bb6a, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: titleFade 1.5s ease-out 0.5s both;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #66bb6a, #4caf50);
+            border-radius: 2px;
+            animation: underlineGrow 1s ease-out 1s both;
+        }
+
+        @keyframes titleFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes underlineGrow {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #66bb6a;
+            line-height: 1.6;
+            font-weight: 500;
+            animation: subtitleFade 1.5s ease-out 1s both;
+            position: relative;
+        }
+
+        @keyframes subtitleFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #81c784;
+            margin-top: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+            animation: taglineFade 1.5s ease-out 1.5s both;
+        }
+
+        @keyframes taglineFade {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-bar-container {
+            margin-top: 2.5rem;
+            position: relative;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(200, 230, 201, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            animation: barFade 1.5s ease-out 2s both;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #66bb6a, #4caf50, #66bb6a);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: 
+                loadProgress 6s ease-out 2.5s both,
+                shimmerProgress 2s ease-in-out infinite 2.5s;
+        }
+
+        @keyframes barFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes loadProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        @keyframes shimmerProgress {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .loading-text {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #66bb6a;
+            font-weight: 500;
+            animation: loadingTextFade 1.5s ease-out 3s both;
+        }
+
+        @keyframes loadingTextFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(102, 187, 106, 0.1);
+            border-radius: 50%;
+            animation: floatElement 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 7s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+            animation-duration: 8s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+            animation-duration: 9s;
+        }
+
+        @keyframes floatElement {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .logo-container {
+                padding: 3rem 2rem;
+                margin: 20px;
+            }
+            
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .logo-text {
+                font-size: 3rem;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="logo-container">
+        <div class="logo-wrapper">
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+            <a href="landing.html" class="logo">
+                <div class="logo-text">Fm</div>
+            </a>
+        </div>
+        
+        <h1 class="title">FinMy</h1>
+        <p class="subtitle">Smart Financial Technology Solutions</p>
+        <p class="tagline">Empowering Your Financial Future</p>
+        
+        <div class="loading-bar-container">
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">Loading your financial dashboard...</div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced loading sequence with visual feedback
+        let progress = 0;
+        const loadingText = document.querySelector('.loading-text');
+        const messages = [
+            "Loading your financial dashboard...",
+            "Connecting to your accounts...",
+            "Preparing your insights...",
+            "Almost ready...",
+            "Welcome to FinMy!"
+        ];
+
+        // Update loading messages
+        function updateLoadingMessage() {
+            if (progress < messages.length) {
+                loadingText.textContent = messages[progress];
+                progress++;
+            }
+        }
+
+        // Start message updates after initial delay
+        setTimeout(() => {
+            const messageInterval = setInterval(() => {
+                updateLoadingMessage();
+                if (progress >= messages.length) {
+                    clearInterval(messageInterval);
+                }
+            }, 1200);
+        }, 3000);
+
+        // Add click interaction to logo
+        document.querySelector('.logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.animation = 'none';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.style.animation = 'logoFloat 3s ease-in-out infinite';
+                this.style.transform = 'scale(1.05)';
+                
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            }, 100);
+        });
+
+        // Redirect to landing page after 6 seconds
+        setTimeout(() => {
+            document.body.style.animation = 'fadeOut 0.8s ease-out forwards';
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 800);
+        }, 6000);
+
+        // Redirect to login page after 9 seconds (fallback)
+        setTimeout(() => {
+            if (!document.hidden) {
+                window.location.href = "login.html";
+            }
+        }, 9000);
+
+        // Add CSS for fade out animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Preload next page for smooth transition
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = 'login.html';
+        document.head.appendChild(link);
+
+        // Add interactive hover effects
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.logo-container');
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        document.addEventListener('mouseleave', function() {
+            const container = document.querySelector('.logo-container');
+            container.style.transform = '';
+        });
+    </script>
+</body>
+</html>

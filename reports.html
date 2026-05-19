@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Reports</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+      min-height: 100vh;
+      padding: 10px;
+      color: #2e7d32;
+      font-size: 13px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+      border-radius: 2px;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: #81c784;
+      font-size: 1em;
+      font-weight: 400;
+    }
+
+    .reports-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .chart-container {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fdf8 100%);
+      padding: 10px 10px 5px 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(46, 125, 50, 0.08);
+      border: 1px solid rgba(129, 199, 132, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+    }
+
+    .chart-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e8f5e8;
+    }
+
+    .chart-title h2 {
+      font-size: 1em;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .chart-icon {
+      font-size: 1.2em;
+      padding: 4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      border: 1px solid #81c784;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 120px;
+      margin-bottom: 5px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-container {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fdf8 100%);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
+      border: 1px solid rgba(129, 199, 132, 0.15);
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e8f5e8;
+    }
+
+    .info-title h3 {
+      font-size: 1em;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .info-icon {
+      font-size: 1em;
+      padding: 3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      border: 1px solid #81c784;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid #f1f8e9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95em;
+    }
+
+    .info-list li:hover {
+      background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);
+      padding-left: 7px;
+      border-radius: 4px;
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .list-item-content {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .list-item-icon {
+      font-size: 0.9em;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2e7d32;
+    }
+
+    .list-item-text {
+      color: #2e7d32;
+      font-weight: 500;
+    }
+
+    .list-item-value {
+      color: #388e3c;
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #81c784;
+      font-style: italic;
+      padding: 10px;
+      font-size: 0.95em;
+    }
+
+    .no-data-icon {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+      opacity: 0.5;
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fdf8 100%);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
+      border: 1px solid rgba(129, 199, 132, 0.15);
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      color: #81c784;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .reports-grid,
+      .info-grid,
+      .summary-stats {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 0 2px;
+      }
+      .chart-canvas {
+        height: 90px;
+      }
+      h1 {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header fade-in">
+      <h1>📊 Financial Reports</h1>
+      <p class="subtitle">Analyze your spending patterns and financial trends</p>
+    </div>
+
+    <div class="summary-stats" id="summaryStats">
+      <!-- Summary stats will be populated by JavaScript -->
+    </div>
+
+    <div class="reports-grid">
+      <div class="chart-container">
+        <div class="chart-title">
+          <div class="chart-icon">📈</div>
+          <h2>Monthly Expense Trend</h2>
+        </div>
+        <div class="chart-canvas">
+          <canvas id="monthlyExpenseChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">
+          <div class="chart-icon">🥧</div>
+          <h2>Expenses by Category</h2>
+        </div>
+        <div class="chart-canvas">
+          <canvas id="categoryPieChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-container">
+        <div class="info-title">
+          <div class="info-icon">🔄</div>
+          <h3>Recurring Expenses</h3>
+        </div>
+        <ul class="info-list" id="recurring-list">
+          <!-- Recurring expenses will be populated by JavaScript -->
+        </ul>
+      </div>
+
+      <div class="info-container">
+        <div class="info-title">
+          <div class="info-icon">🏆</div>
+          <h3>Top 3 Expense Months</h3>
+        </div>
+        <ul class="info-list" id="top-months">
+          <!-- Top months will be populated by JavaScript -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    // Category icons mapping
+    const categoryIcons = {
+      'food': '🍽️',
+      'transport': '🚗',
+      'shopping': '🛍️',
+      'entertainment': '🎬',
+      'healthcare': '🏥',
+      'education': '📚',
+      'utilities': '💡',
+      'rent': '🏠',
+      'insurance': '🛡️',
+      'fitness': '💪',
+      'travel': '✈️',
+      'groceries': '🛒',
+      'dining': '🍽️',
+      'fuel': '⛽',
+      'clothing': '👕',
+      'electronics': '📱',
+      'salary': '💼',
+      'freelance': '💻',
+      'business': '🏢',
+      'investment': '📈',
+      'other': '📋'
+    };
+
+    function getCategoryIcon(category) {
+      const lowerCategory = category.toLowerCase();
+      return categoryIcons[lowerCategory] || '📋';
+    }
+
+    function groupByMonth(transactions) {
+      const grouped = {};
+      transactions.forEach(({ date, type, amount }) => {
+        if (type !== 'expense') return;
+        const month = new Date(date).toLocaleString('default', { month: 'short', year: 'numeric' });
+        grouped[month] = (grouped[month] || 0) + Number(amount);
+      });
+      return grouped;
+    }
+
+    function getCategoryTotals(transactions) {
+      const totals = {};
+      transactions.forEach(({ category, type, amount }) => {
+        if (type !== 'expense') return;
+        totals[category] = (totals[category] || 0) + Number(amount);
+      });
+      return totals;
+    }
+
+    function getRecurringExpenses(transactions) {
+      const freq = {};
+      transactions.forEach(({ category, type }) => {
+        if (type !== 'expense') return;
+        freq[category] = (freq[category] || 0) + 1;
+      });
+      return Object.entries(freq).filter(([, count]) => count > 2);
+    }
+
+    function getTopMonths(expenseByMonth) {
+      return Object.entries(expenseByMonth)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3);
+    }
+
+    function updateSummaryStats() {
+      const totalExpenses = transactions
+        .filter(tx => tx.type === 'expense')
+        .reduce((sum, tx) => sum + parseFloat(tx.amount), 0);
+      
+      const totalIncome = transactions
+        .filter(tx => tx.type === 'income')
+        .reduce((sum, tx) => sum + parseFloat(tx.amount), 0);
+      
+      const avgExpensePerMonth = Object.values(groupByMonth(transactions)).length > 0 
+        ? totalExpenses / Object.values(groupByMonth(transactions)).length 
+        : 0;
+      
+      const topCategory = Object.entries(getCategoryTotals(transactions))
+        .sort((a, b) => b[1] - a[1])[0];
+
+      const statsContainer = document.getElementById('summaryStats');
+      statsContainer.innerHTML = `
+        <div class="stat-card fade-in">
+          <div class="stat-icon">💸</div>
+          <div class="stat-value">₹${totalExpenses.toLocaleString()}</div>
+          <div class="stat-label">Total Expenses</div>
+        </div>
+        <div class="stat-card fade-in">
+          <div class="stat-icon">📊</div>
+          <div class="stat-value">₹${avgExpensePerMonth.toLocaleString()}</div>
+          <div class="stat-label">Avg Monthly Expense</div>
+        </div>
+        <div class="stat-card fade-in">
+          <div class="stat-icon">${topCategory ? getCategoryIcon(topCategory[0]) : '📋'}</div>
+          <div class="stat-value">${topCategory ? topCategory[0] : 'N/A'}</div>
+          <div class="stat-label">Top Category</div>
+        </div>
+        <div class="stat-card fade-in">
+          <div class="stat-icon">📈</div>
+          <div class="stat-value">₹${totalIncome.toLocaleString()}</div>
+          <div class="stat-label">Total Income</div>
+        </div>
+      `;
+    }
+
+    // Chart.js default colors for pale green theme
+    const chartColors = {
+      primary: '#66bb6a',
+      secondary: '#81c784',
+      accent: '#4caf50',
+      background: 'rgba(102, 187, 106, 0.1)',
+      pieColors: [
+        '#66bb6a', '#81c784', '#4caf50', '#388e3c', '#2e7d32',
+        '#a5d6a7', '#c8e6c9', '#e8f5e8', '#f1f8e9', '#dcedc8'
+      ]
+    };
+
+    // Draw Monthly Expense Bar Chart
+    const expenseByMonth = groupByMonth(transactions);
+    const barCtx = document.getElementById('monthlyExpenseChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(expenseByMonth),
+        datasets: [{
+          label: 'Monthly Expenses',
+          data: Object.values(expenseByMonth),
+          backgroundColor: chartColors.primary,
+          borderColor: chartColors.accent,
+          borderWidth: 2,
+          borderRadius: 8,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(129, 199, 132, 0.1)'
+            },
+            ticks: {
+              color: '#2e7d32',
+              callback: function(value) {
+                return '₹' + value.toLocaleString();
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#2e7d32'
+            }
+          }
+        }
+      }
+    });
+
+    // Draw Pie Chart
+    const categoryTotals = getCategoryTotals(transactions);
+    const pieCtx = document.getElementById('categoryPieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(categoryTotals),
+        datasets: [{
+          data: Object.values(categoryTotals),
+          backgroundColor: chartColors.pieColors,
+          borderColor: '#ffffff',
+          borderWidth: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#2e7d32',
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        }
+      }
+    });
+
+    // List Recurring Expenses
+    const recurringList = document.getElementById('recurring-list');
+    const recurring = getRecurringExpenses(transactions);
+    if (recurring.length > 0) {
+      recurring.forEach(([category, count]) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="list-item-content">
+            <div class="list-item-icon">${getCategoryIcon(category)}</div>
+            <span class="list-item-text">${category}</span>
+          </div>
+          <span class="list-item-value">${count} times</span>
+        `;
+        recurringList.appendChild(li);
+      });
+    } else {
+      recurringList.innerHTML = `
+        <div class="no-data">
+          <div class="no-data-icon">📝</div>
+          <div>No recurring expenses found</div>
+        </div>
+      `;
+    }
+
+    // List Top 3 Months
+    const topMonths = document.getElementById('top-months');
+    const top3 = getTopMonths(expenseByMonth);
+    if (top3.length > 0) {
+      top3.forEach(([month, amount], index) => {
+        const medals = ['🥇', '🥈', '🥉'];
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="list-item-content">
+            <div class="list-item-icon">${medals[index]}</div>
+            <span class="list-item-text">${month}</span>
+          </div>
+          <span class="list-item-value">₹${amount.toLocaleString()}</span>
+        `;
+        topMonths.appendChild(li);
+      });
+    } else {
+      topMonths.innerHTML = `
+        <div class="no-data">
+          <div class="no-data-icon">📊</div>
+          <div>No expense data available</div>
+        </div>
+      `;
+    }
+
+    // Initialize summary stats
+    updateSummaryStats();
+
+    // Add demo data if localStorage is empty
+    if (transactions.length === 0) {
+      const demoTransactions = [
+        { type: 'expense', category: 'Food', amount: 2500, date: '2024-01-15' },
+        { type: 'expense', category: 'Transport', amount: 1200, date: '2024-01-14' },
+        { type: 'expense', category: 'Food', amount: 1800, date: '2024-01-13' },
+        { type: 'expense', category: 'Shopping', amount: 3500, date: '2024-01-12' },
+        { type: 'expense', category: 'Transport', amount: 800, date: '2024-01-11' },
+        { type: 'expense', category: 'Food', amount: 2200, date: '2024-01-10' },
+        { type: 'income', category: 'Salary', amount: 50000, date: '2024-01-01' }
+      ];
+      localStorage.setItem('transactions', JSON.stringify(demoTransactions));
+      location.reload();
+    }
+  </script>
+</body>
+</html>
