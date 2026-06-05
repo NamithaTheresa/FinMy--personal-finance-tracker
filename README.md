@@ -154,7 +154,7 @@ git clone https://github.com/NamithaTheresa/FinMy--personal-finance-tracker.git
 
 **Namitha Theresa V J**
 
-Computer Science Engineer | Data Science Enthusiast | Web Developer
+Computer Science Engineer 
 
 ---
 
