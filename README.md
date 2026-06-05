@@ -1,81 +1,144 @@
-# 💸 FinMy – Personal Finance Tracker
+# 💰 FinMy - Personal Finance Tracker
 
-<p align="center">
-  <b>A modern and user-friendly personal finance management web application</b><br>
-  Track expenses, monitor savings, visualize spending, and achieve your financial goals 📊
-</p>
+FinMy is a modern personal finance management web application that helps users track income, expenses, savings goals, tasks, and financial reports through an intuitive and user-friendly interface.
 
----
+## 🚀 Features
 
-## ✨ Features
+### 🔐 Authentication
 
-✅ Income & Expense Tracking  
-✅ Interactive Pie & Bar Charts  
-✅ Financial Goal Management  
-✅ Transaction History  
-✅ Budget Monitoring  
-✅ Reports & Analytics Dashboard  
-✅ Responsive Modern UI  
-✅ Local Storage Data Persistence  
-✅ Multi-page Navigation System  
+* User Registration
+* Secure Login Page
+* Responsive Authentication Screens
 
----
+### 📊 Dashboard
+
+* Financial Overview
+* Income and Expense Summary
+* Quick Access Navigation
+* Real-time Updates
+
+### 💳 Transaction Management
+
+* Add Income and Expenses
+* Categorize Transactions
+* Track Spending History
+* View Transaction Records
+
+### 🎯 Financial Goals
+
+* Create Savings Goals
+* Track Goal Progress
+* Monitor Achievement Status
+
+### 📈 Reports & Analytics
+
+* Spending Analysis
+* Financial Insights
+* Visual Reports
+* Expense Tracking
+
+### ✅ To-Do Manager
+
+* Create Financial Tasks
+* Manage Daily Activities
+* Track Task Completion
+
+### 🤖 AI Finance Assistant
+
+* Smart Financial Guidance
+* Personalized Suggestions
+* Finance-related Support
+
+## 🛠️ Technologies Used
+
+* HTML5
+* CSS3
+* JavaScript
+* Local Storage
+* Responsive Web Design
 
 ## 📸 Screenshots
 
-### 🏠 Dashboard
-<img width="800" alt="Dashboard" src="Screenshot 2026-05-19 194754">
+### Landing Page
 
-### 📊 Reports Page
-<img width="800" alt="Reports" src="Screenshot 2026-05-19 195353">
+![Landing Page](assets/screenshots/landing.png)
 
-### 🎯 Goals Section
-<img width="800" alt="Goals" src="Screenshot 2026-05-19 195343">
+### Sign In Page
 
+![Sign In](assets/screenshots/sign_in.png)
 
+### Dashboard
 
----
+![Dashboard](assets/screenshots/home.png)
 
-## 🛠️ Tech Stack
+### Transactions
 
-| Technology | Usage |
-|---|---|
-| HTML5 | Structure |
-| CSS3 | Styling & Responsive Design |
-| JavaScript | Application Logic |
-| Chart.js | Data Visualization |
-| Local Storage | Data Persistence |
+![Transactions](assets/screenshots/transactions.png)
 
----
+### Financial Goals
 
-## 🚀 Key Functionalities
+![Goals](assets/screenshots/goals.png)
 
-- Add and manage transactions
-- Categorize expenses and income
-- Visualize spending patterns with charts
-- Set and track financial goals
-- Monitor monthly savings
-- Generate financial insights and reports
+### Reports
 
----
+![Reports](assets/screenshots/Reports.png)
+
+### To-Do Manager
+
+![To-Do](assets/screenshots/to_do.png)
+
+### Add Task
+
+![Add Task](assets/screenshots/add_task.png)
 
 ## 📂 Project Structure
 
-```bash
-FinMy/
+```text
+FinMy
+│
+├── assets
+│   └── screenshots
 │
 ├── home.html
-├── reports.html
-├── goals.html
+├── login.html
+├── registration.html
 ├── transactions.html
-├── ai_assistant.html
+├── goals.html
+├── reports.html
 ├── to-do.html
+├── ai_assistant.html
 └── README.md
 ```
 
----
+## ⚙️ How to Run
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/FinMy.git
+```
+
+2. Open the project in VS Code
+
+3. Run using Live Server
+
+4. Explore the features of FinMy
+
+## 🎯 Future Enhancements
+
+* Firebase Authentication
+* Cloud Database Integration
+* Expense Prediction using AI
+* Budget Planning Assistant
+* Export Reports as PDF
+* Mobile App Version
 
 ## 👩‍💻 Author
 
-### Namitha Theresa V J
+**Namitha Theresa V J**
 
+Computer Science Engineer 
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a star on GitHub.
