@@ -1,53 +1,54 @@
 # 💰 FinMy - Personal Finance Tracker
 
-FinMy is a modern personal finance management web application that helps users track income, expenses, savings goals, tasks, and financial reports through an intuitive and user-friendly interface.
+FinMy is a modern and user-friendly personal finance management web application designed to help users manage their finances efficiently. The application provides features for tracking transactions, setting financial goals, analyzing spending patterns, managing tasks, and receiving AI-powered financial assistance.
+
+---
 
 ## 🚀 Features
 
-### 🔐 Authentication
+### 🔐 User Authentication
 
 * User Registration
-* Secure Login Page
-* Responsive Authentication Screens
+* Secure Login System
+* Responsive Authentication Pages
 
 ### 📊 Dashboard
 
-* Financial Overview
-* Income and Expense Summary
-* Quick Access Navigation
-* Real-time Updates
+* Overview of financial activities
+* Quick access to all modules
+* Financial summary and insights
 
 ### 💳 Transaction Management
 
-* Add Income and Expenses
-* Categorize Transactions
-* Track Spending History
-* View Transaction Records
+* Add income and expenses
+* Track financial records
+* Categorize transactions
 
-### 🎯 Financial Goals
+### 🎯 Goal Tracking
 
-* Create Savings Goals
-* Track Goal Progress
-* Monitor Achievement Status
+* Create savings goals
+* Monitor goal progress
+* Track achievements
 
 ### 📈 Reports & Analytics
 
-* Spending Analysis
-* Financial Insights
-* Visual Reports
-* Expense Tracking
+* Financial reports
+* Spending analysis
+* Expense tracking insights
 
 ### ✅ To-Do Manager
 
-* Create Financial Tasks
-* Manage Daily Activities
-* Track Task Completion
+* Create and manage tasks
+* Track completion status
+* Organize financial activities
 
 ### 🤖 AI Finance Assistant
 
-* Smart Financial Guidance
-* Personalized Suggestions
-* Finance-related Support
+* Smart financial guidance
+* Personalized suggestions
+* Finance-related support
+
+---
 
 ## 🛠️ Technologies Used
 
@@ -57,47 +58,48 @@ FinMy is a modern personal finance management web application that helps users t
 * Local Storage
 * Responsive Web Design
 
+---
+
 ## 📸 Screenshots
 
 ### Landing Page
 
-![Landing Page](assets/screenshots/landing.png)
+![Landing Page](landing.png)
 
 ### Sign In Page
 
-![Sign In](assets/screenshots/sign_in.png)
+![Sign In](sign_in.png)
 
 ### Dashboard
 
-![Dashboard](assets/screenshots/home.png)
+![Dashboard](home.png)
 
 ### Transactions
 
-![Transactions](assets/screenshots/transactions.png)
+![Transactions](transactions.png)
 
 ### Financial Goals
 
-![Goals](assets/screenshots/goals.png)
+![Goals](goals.png)
 
 ### Reports
 
-![Reports](assets/screenshots/Reports.png)
+![Reports](Reports.png)
 
 ### To-Do Manager
 
-![To-Do](assets/screenshots/to_do.png)
+![To-Do](to_do.png)
 
 ### Add Task
 
-![Add Task](assets/screenshots/add_task.png)
+![Add Task](add_task.png)
+
+---
 
 ## 📂 Project Structure
 
 ```text
 FinMy
-│
-├── assets
-│   └── screenshots
 │
 ├── home.html
 ├── login.html
@@ -107,22 +109,35 @@ FinMy
 ├── reports.html
 ├── to-do.html
 ├── ai_assistant.html
-└── README.md
+├── README.md
+│
+├── landing.png
+├── sign_in.png
+├── home.png
+├── transactions.png
+├── goals.png
+├── Reports.png
+├── to_do.png
+└── add_task.png
 ```
+
+---
 
 ## ⚙️ How to Run
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/FinMy.git
+git clone https://github.com/NamithaTheresa/FinMy--personal-finance-tracker.git
 ```
 
 2. Open the project in VS Code
 
-3. Run using Live Server
+3. Run the application using Live Server
 
-4. Explore the features of FinMy
+4. Explore the various financial management features
+
+---
 
 ## 🎯 Future Enhancements
 
@@ -131,14 +146,18 @@ git clone https://github.com/YOUR_USERNAME/FinMy.git
 * Expense Prediction using AI
 * Budget Planning Assistant
 * Export Reports as PDF
-* Mobile App Version
+* Mobile Application Support
+
+---
 
 ## 👩‍💻 Author
 
 **Namitha Theresa V J**
 
-Computer Science Engineer 
+Computer Science Engineer | Data Science Enthusiast | Web Developer
+
+---
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a star on GitHub.
+If you found this project useful, please consider giving it a star on GitHub.
